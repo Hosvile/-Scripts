@@ -1,0 +1,83 @@
+
+local Players = game:GetService("Players")
+local lplay = Players.LocalPlayer
+local OLplay = lplay.Name 
+
+local function Touch(x)
+if lplay.Character then
+local Root = lplay.Character:FindFirstChildWhichIsA("BasePart")
+x = x.FindFirstAncestorWhichIsA(x, "Part")
+if x then
+if firetouchinterest then
+return task.spawn(function()
+	firetouchinterest(x, Root, 1, wait() and firetouchinterest(x, Root, 0))
+	end)
+end
+x.CFrame = Root.CFrame
+end
+end
+end
+
+while true do
+if lplay.Character and lplay.Character:FindFirstChild("Humanoid") and lplay.Character.Humanoid.RootPart then
+
+local PlayerGui = lplay.PlayerGui
+local Top = PlayerGui.Top.Top
+local ProgressBar = Top.ProgressBar
+local Stage = ProgressBar.Stage
+
+if Stage.ContentText:match("Spawn") then
+local Checkpoints = workspace.Checkpoints
+local Spawn = Checkpoints.Spawn
+for i, v in pairs(Spawn:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+Touch(v)
+--lplay.Character.HumanoidRootPart.Position = v.Parent.Position
+end
+end
+
+repeat task.wait() until Stage.ContentText:match("60")
+local Rebirth = workspace.RebirthButtons
+local Spawn = Rebirth.Spawn
+local Prompt = Spawn.ProximityPrompt
+local TS = game:GetService("TweenService")
+local Info = TweenInfo.new(0.1)
+local Goal = {}
+Goal.CFrame = Spawn.CFrame
+local HP = lplay.Character.Humanoid.RootPart
+local Tween = TS:Create(HP,Info,Goal)
+Tween:Play()
+task.wait(0.3)
+fireproximityprompt(Prompt)
+task.wait(0.4)
+end
+
+if Stage.ContentText:match("Candy") then
+local Checkpoints = workspace.Checkpoints
+local Spawn = Checkpoints.Candy
+for i, v in pairs(Spawn:GetDescendants()) do
+if v:IsA("TouchTransmitter") then
+Touch(v)
+--lplay.Character.HumanoidRootPart.Position = v.Parent.Position
+end
+end
+
+repeat task.wait() until Stage.ContentText:match("46")
+local Rebirth = workspace.RebirthButtons
+local Spawn = Rebirth.Candy
+local Prompt = Spawn.ProximityPrompt
+local TS = game:GetService("TweenService")
+local Info = TweenInfo.new(0.1)
+local Goal = {}
+Goal.CFrame = Spawn.CFrame
+local HP = lplay.Character.Humanoid.RootPart
+local Tween = TS:Create(HP,Info,Goal)
+Tween:Play()
+task.wait(0.3)
+fireproximityprompt(Prompt)
+task.wait(0.4)
+end
+end
+
+task.wait()
+end
