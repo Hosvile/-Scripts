@@ -1,4 +1,4 @@
---Can be autoexecuted
+--
 if not game:IsLoaded() then
 game.Loaded:Wait()
 end
@@ -136,6 +136,8 @@ if not ToggleBtn.ClassName:match("UI") then
 ToggleBtn.Active = false
 end
 end
+
+ToggleBtn.Active = true
 
 MainUI.Tabs.Active = true
 
