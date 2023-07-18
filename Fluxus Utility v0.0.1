@@ -11,7 +11,7 @@ local UserInputService = game:GetService("UserInputService")
 
 local me = game:GetService("Players").LocalPlayer
 
-local FluxUI = game:GetService("CoreGui").RobloxGui:FindFirstChild("FluxusAndroidUI") or FluxUI
+local FluxUI = game:GetService("CoreGui"):FindFirstChild("FluxusAndroidUI") or gethui():FindFirstChild("FluxusAndroidUI") or FluxUI
 local Container = FluxUI.Container
 local ToggleBtn = Container.ToggleBtn
 local Border = ToggleBtn.Border
